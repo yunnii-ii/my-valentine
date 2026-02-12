@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Be My Valentine?</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120vh;
+            margin: 0;
+            background-color: #fce4ec;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* ဖုန်းမှာ scroll မဖြစ်အောင် */
+            touch-action: manipulation; /* double tap zoom ဖြစ်တာကို တားဖို့ */
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        img {
+            max-width: 80%; /* ဖုန်း screen ထက် မကျော်အောင် */
+            width: 300px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #b71c1c;
+            font-size: 1.8rem; /* ဖုန်းနဲ့ဆိုရင် ပိုအဆင်ပြေတဲ့ size */
+            margin-bottom: 5px;
+            padding: 0 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            min-height: 200px; /* Yes ကြီးလာဖို့ နေရာချန်တာ */
+        }
+
+        #yesBtn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            z-index: 10; /* Yes က အမြဲအပေါ်မှာ ရှိနေဖို့ */
+        }
+
+        #noBtn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        /* ဖုန်း screen ကြီးရင် စာသားကို နည်းနည်း ထပ်ကြီးပေးမယ် */
+        @media (min-width: 500px) {
+            h1 { font-size: 2.0rem; }
+            img { width: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+<iframe width="0" height="0" src="https://www.youtube.com/embed/l74l_f-6X8Y?autoplay=1&loop=1&playlist=l74l_f-6X8Y" frameborder="0" allow="autoplay"></iframe>
+
+<div class="container" id="content">
+    <img id="sticker" src="https://media.tenor.com/l24xxsX28dkAAAAm/bug-cat.webp" alt="Cute Sticker">
+    <h1 id="question">DD, Will you be my Valentine?</h1>
+    <div class="btn-group">
+        <button id="yesBtn" onclick="accepted()">Yes</button>
+        <button id="noBtn" onclick="denied()">No</button>
+    </div>
+</div>
+
+<script>
+    let yesScale = 1;
+    let noClickCount = 0;
+
+    const noResponses = [
+        "Are you sure? 🥺",
+        "Really sure?? 😭",
+        "Pookie please... 💔",
+        "Just think about it!",
+        "If you say no, I will be really sad",
+        "I'll be very very sad...",
+        "Please Click YES Bby❤️"
+    ];
+
+    const stickers = [
+        "https://media.tenor.com/2pRiML1iqt4AAAAm/tkthao219-bubududu.webp",
+        "https://media.tenor.com/oaK022uk2qoAAAAm/peach-and-goma-peachcat.webp",
+        "https://media.tenor.com/9z8aTaVmPfwAAAAm/cats-sad.webp",
+        "https://media.tenor.com/dUKgXDdhQ7AAAAAM/sad-sad-cat.gif"
+    ];
+
+    function denied() {
+        yesScale += 0.7; // No နှိပ်လေလေ Yes က ကြီးလာလေလေ
+        document.getElementById('yesBtn').style.transform = `scale(${yesScale})`;
+
+        if (noClickCount < noResponses.length) {
+            document.getElementById('noBtn').innerText = noResponses[noClickCount];
+            // ပုံကိုလည်း အဆင့်လိုက် ပြောင်းပေးမယ်
+            let stickerIndex = noClickCount % stickers.length;
+            document.getElementById('sticker').src = stickers[stickerIndex];
+            noClickCount++;
+        }
+        
+        // Yes အရမ်းကြီးလာရင် No ကို ဖျောက်လိုက်မယ်
+        if (yesScale > 6) {
+            document.getElementById('noBtn').style.display = 'none';
+        }
+    }
+    function accepted() {
+        document.getElementById('content').innerHTML = `
+            <img src="https://media1.tenor.com/m/qVqhTuCC4XUAAAAC/milk-and-mocha-milk.gif" style="width:80%; max-width:350px;">
+            <h1 style="font-size: 2.5rem; color: #b71c1c;">Yayyy! Knew you would say yes!❤️</h1>`
+        ;
+    }
+</script>
+
+</body>
+</html>
