@@ -14,8 +14,8 @@
             margin: 0;
             background-color: #fce4ec;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden; /* ဖုန်းမှာ scroll မဖြစ်အောင် */
-            touch-action: manipulation; /* double tap zoom ဖြစ်တာကို တားဖို့ */
+            overflow: hidden; /* scroll */
+            touch-action: manipulation; /* double tap zoom  */
         }
 
         .container {
@@ -25,7 +25,7 @@
         }
 
         img {
-            max-width: 80%; /* ဖုန်း screen ထက် မကျော်အောင် */
+            max-width: 80%; /* under ph screen */
             width: 300px;
             height: auto;
             margin-bottom: 10px;
@@ -33,7 +33,7 @@
 
         h1 {
             color: #b71c1c;
-            font-size: 1.8rem; /* ဖုန်းနဲ့ဆိုရင် ပိုအဆင်ပြေတဲ့ size */
+            font-size: 1.8rem; /* ph size */
             margin-bottom: 5px;
             padding: 0 10px;
         }
@@ -43,7 +43,7 @@
             justify-content: center;
             align-items: center;
             gap: 15px;
-            min-height: 200px; /* Yes ကြီးလာဖို့ နေရာချန်တာ */
+            min-height: 200px; 
         }
 
         #yesBtn {
@@ -55,7 +55,7 @@
             border-radius: 12px;
             cursor: pointer;
             transition: transform 0.2s ease;
-            z-index: 10; /* Yes က အမြဲအပေါ်မှာ ရှိနေဖို့ */
+            z-index: 10; /* Yes */
         }
 
         #noBtn {
@@ -68,7 +68,7 @@
             cursor: pointer;
         }
 
-        /* ဖုန်း screen ကြီးရင် စာသားကို နည်းနည်း ထပ်ကြီးပေးမယ် */
+        /* */
         @media (min-width: 500px) {
             h1 { font-size: 2.0rem; }
             img { width: 200px; }
@@ -110,18 +110,18 @@
     ];
 
     function denied() {
-        yesScale += 0.7; // No နှိပ်လေလေ Yes က ကြီးလာလေလေ
+        yesScale += 0.7;
         document.getElementById('yesBtn').style.transform = `scale(${yesScale})`;
 
         if (noClickCount < noResponses.length) {
             document.getElementById('noBtn').innerText = noResponses[noClickCount];
-            // ပုံကိုလည်း အဆင့်လိုက် ပြောင်းပေးမယ်
+        
             let stickerIndex = noClickCount % stickers.length;
             document.getElementById('sticker').src = stickers[stickerIndex];
             noClickCount++;
         }
         
-        // Yes အရမ်းကြီးလာရင် No ကို ဖျောက်လိုက်မယ်
+        
         if (yesScale > 6) {
             document.getElementById('noBtn').style.display = 'none';
         }
@@ -135,4 +135,5 @@
 </script>
 
 </body>
+
 </html>
